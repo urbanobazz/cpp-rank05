@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 20:17:14 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/03 19:47:48 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:50:28 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int main(void)
 		ShrubberyCreationForm form("Charlie");
 
 		charlie.signForm(form);
-		charlie.executeForm(form);
+		charlie.executeForm(form); //creates the file Charlie_shrubbery
 	}
 	catch (std::exception &e)
 	{
