@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 20:17:46 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/03 17:30:13 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:44:11 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 
 class Bureaucrat
 {
