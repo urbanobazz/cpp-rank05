@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:53:24 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/03 22:28:55 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:28:59 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ Intern &Intern::operator=(Intern const &other) {
 }
 
 AForm *Intern::makeForm(std::string formName, std::string target) {
-	typedef AForm *(Intern::*FormCreator)(std::string) const;
-	FormCreator formCreators[3] = {
+	AForm *(Intern::*membFunction[3])(std::string) const = {
 		&Intern::createShrubberyCreationForm,
 		&Intern::createRobotomyRequestForm,
 		&Intern::createPresidentialPardonForm
@@ -40,7 +39,7 @@ AForm *Intern::makeForm(std::string formName, std::string target) {
 	for (int i = 0; i < 3; i++) {
 		if (formName == formNames[i]) {
 			std::cout << "Intern creates " << formName << std::endl;
-			return (this->*formCreators[i])(target);
+			return (this->*membFunction[i])(target);
 		}
 	}
 	throw FormNotFoundException();
