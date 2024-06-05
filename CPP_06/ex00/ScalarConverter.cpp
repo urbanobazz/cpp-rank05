@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:15:30 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/05 13:16:03 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:19:09 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,37 @@ ScalarConverter::~ScalarConverter(void) {}
 
 void ScalarConverter::convert(std::string const &input)
 {
-	std::cout << "char: ";
-	try {
-		std::istringstream iss(input);
-		int temp;
-		iss >> temp;
-		char c = static_cast<char>(temp);
-		if (std::isprint(c))
-			std::cout << "'" << c << "'" << std::endl;
-		else
-			std::cout << "Non displayable" << std::endl;
-	}
-	catch (std::exception &e) {
+	int num = std::atoi(input.c_str());
+	// Char
+	std::cout << "Char: ";
+	if (num == 0 && !(input.size() == 1 && input[0] == '0'))
 		std::cout << "impossible" << std::endl;
-	}
-	std::cout << "int: ";
-	try {
-		std::istringstream iss(input);
-		int i;
-		iss >> i;
-		std::cout << i << std::endl;
-	}
-	catch (std::exception &e) {
+	else if (std::isprint(num))
+		std::cout << "'" << static_cast<char>(num) << "'" << std::endl;
+	else
+		std::cout << "non displayable" << std::endl;
+
+	//Int
+	std::cout << "Int: ";
+	if (num == 0 && !(input.size() == 1 && input[0] == '0'))
 		std::cout << "impossible" << std::endl;
-	}
-	std::cout << "float: ";
-	try {
-		std::istringstream iss(input);
-		float f;
-		iss >> f;
-		std::cout << f << "f" << std::endl;
-	}
-	catch (std::exception &e) {
+	else
+		std::cout << num << std::endl;
+
+	//Float
+	std::cout << "Float: ";
+	char *end;
+	float f = std::strtof(input.c_str(), &end);
+	if (end == input.c_str() || (f == 0.0f && input != "0" && input != "0.0"))
 		std::cout << "impossible" << std::endl;
-	}
-	std::cout << "double: ";
-	try {
-		std::istringstream iss(input);
-		double d;
-		iss >> d;
-		std::cout << d << std::endl;
-	}
-	catch (std::exception &e) {
+	else
+		std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+
+	//Double
+	std::cout << "Double: ";
+	double d = strtod(input.c_str(), &end);
+	if (end == input.c_str() || (d == 0.0 && input != "0" && input != "0.0"))
 		std::cout << "impossible" << std::endl;
-	}
+	else
+		std::cout << std::fixed << std::setprecision(1) << d << std::endl;
 }

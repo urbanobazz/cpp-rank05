@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:15:12 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/05 13:16:00 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:08:18 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include <iostream>
 #include <string>
-#include <sstream>
+#include <iomanip>
+#include <cstdlib>
 #include <exception>
 
 class ScalarConverter
