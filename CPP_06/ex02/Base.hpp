@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 19:06:10 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/05 19:14:42 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:47:10 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 class Base
 {
 	public:
-		virtual ~Base() {};
+		virtual ~Base();
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 19:22:17 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/05 19:26:53 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:59:13 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <exception>
 
-Base *generate(void) {
+static Base *generate(void) {
 	int random = rand() % 3;
 
 	if (random == 0) {
@@ -35,37 +36,37 @@ Base *generate(void) {
 	}
 }
 
-void identify_from_pointer(Base *p) {
+static void identify(Base *p) {
 	if (dynamic_cast<A*>(p)) {
-		std::cout << "A" << std::endl;
+		std::cout << "By pointer: A" << std::endl;
 	}
 	else if (dynamic_cast<B*>(p)) {
-		std::cout << "B" << std::endl;
+		std::cout << "By pointer: B" << std::endl;
 	}
 	else if (dynamic_cast<C*>(p)) {
-		std::cout << "C" << std::endl;
+		std::cout << "By pointer: C" << std::endl;
 	}
 }
 
-void identify_from_reference(Base &p) {
+static void identify(Base &p) {
 	try {
 		A &a = dynamic_cast<A&>(p);
 		(void)a;
-		std::cout << "A" << std::endl;
-	} catch (std::bad_cast &e) {
+		std::cout << "By reference: A" << std::endl;
 	}
+	catch (...) {}
 	try {
 		B &b = dynamic_cast<B&>(p);
 		(void)b;
-		std::cout << "B" << std::endl;
-	} catch (std::bad_cast &e) {
+		std::cout << "By reference: B" << std::endl;
 	}
+	catch (...) {}
 	try {
 		C &c = dynamic_cast<C&>(p);
 		(void)c;
-		std::cout << "C" << std::endl;
-	} catch (std::bad_cast &e) {
+		std::cout << "By reference: C" << std::endl;
 	}
+	catch (...) {}
 }
 
 int main(void) {
@@ -73,8 +74,8 @@ int main(void) {
 
 	Base *base = generate();
 
-	identify_from_pointer(base);
-	identify_from_reference(*base);
+	identify(base);
+	identify(*base);
 
 	delete base;
 
