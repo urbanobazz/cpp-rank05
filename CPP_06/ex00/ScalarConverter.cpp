@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:15:30 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/05 13:03:31 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:16:03 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void ScalarConverter::convert(std::string const &input)
 {
 	std::cout << "char: ";
 	try {
-		char c = static_cast<char>(std::stoi(input));
+		std::istringstream iss(input);
+		int temp;
+		iss >> temp;
+		char c = static_cast<char>(temp);
 		if (std::isprint(c))
 			std::cout << "'" << c << "'" << std::endl;
 		else
@@ -38,7 +41,9 @@ void ScalarConverter::convert(std::string const &input)
 	}
 	std::cout << "int: ";
 	try {
-		int i = std::stoi(input);
+		std::istringstream iss(input);
+		int i;
+		iss >> i;
 		std::cout << i << std::endl;
 	}
 	catch (std::exception &e) {
@@ -46,7 +51,9 @@ void ScalarConverter::convert(std::string const &input)
 	}
 	std::cout << "float: ";
 	try {
-		float f = std::stof(input);
+		std::istringstream iss(input);
+		float f;
+		iss >> f;
 		std::cout << f << "f" << std::endl;
 	}
 	catch (std::exception &e) {
@@ -54,7 +61,9 @@ void ScalarConverter::convert(std::string const &input)
 	}
 	std::cout << "double: ";
 	try {
-		double d = std::stod(input);
+		std::istringstream iss(input);
+		double d;
+		iss >> d;
 		std::cout << d << std::endl;
 	}
 	catch (std::exception &e) {
