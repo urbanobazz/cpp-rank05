@@ -6,7 +6,15 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 19:07:41 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/05 19:07:41 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:17:32 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef C_HPP
+# define C_HPP
+
+# include "Base.hpp"
+
+class C: public Base {};
+
+#endif

@@ -6,7 +6,17 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 19:06:10 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/05 19:08:36 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:14:42 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef BASE_HPP
+# define BASE_HPP
+
+class Base
+{
+	public:
+		virtual ~Base() {};
+};
+
+#endif
