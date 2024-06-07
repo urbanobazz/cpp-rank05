@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:46:05 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/07 16:53:35 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:01:25 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ class	Span
 {
 	public:
 		Span(unsigned int N);
-		Span(Span const &src);
+		Span(Span const &other);
 		~Span(void);
 
-		Span &operator=(Span const &rhs);
+		Span &operator=(Span const &other);
 
 		void	addNumber(int n);
 		void	addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
