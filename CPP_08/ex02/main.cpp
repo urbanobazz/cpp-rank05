@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:46:34 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/07 20:57:47 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:16:06 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int main()
 	mstack.push(17);
 
 	std::cout << "Top: " << mstack.top() << std::endl;
-
 	mstack.pop();
-
 	std::cout << "Size: " << mstack.size() << std::endl;
 
 	mstack.push(3);
@@ -38,8 +36,15 @@ int main()
 	MutantStack<int>::iterator it = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end();
 
+	std::cout << "----------- Increment/Decrement test ----------------" << std::endl;
+
+	std::cout << "Iterator value before incrementing: " << *it << std::endl;
 	++it;
+	std::cout << "Iterator value after incrementing: " << *it << std::endl;
 	--it;
+	std::cout << "Iterator value after decrementing: " << *it << std::endl;
+
+	std::cout << "----------- print stack ----------------" << std::endl;
 	while (it != ite) {
 		std::cout << *it << std::endl;
 		++it;
@@ -66,9 +71,15 @@ int main()
 	std::list<int>::iterator it2 = list.begin();
 	std::list<int>::iterator ite2 = list.end();
 
-	++it2;
-	--it2;
+	std::cout << "----------- Increment/Decrement test ----------------" << std::endl;
 
+	std::cout << "Iterator value before incrementing: " << *it2 << std::endl;
+	++it2;
+	std::cout << "Iterator value after incrementing: " << *it2 << std::endl;
+	--it2;
+	std::cout << "Iterator value after decrementing: " << *it2 << std::endl;
+
+	std::cout << "----------- print stack ----------------" << std::endl;
 	while (it2 != ite2) {
 		std::cout << *it2 << std::endl;
 		++it2;
@@ -95,9 +106,15 @@ int main()
 	std::vector<int>::iterator it3 = vec.begin();
 	std::vector<int>::iterator ite3 = vec.end();
 
-	++it3;
-	--it3;
+	std::cout << "----------- Increment/Decrement test ----------------" << std::endl;
 
+	std::cout << "Iterator value before incrementing: " << *it3 << std::endl;
+	++it3;
+	std::cout << "Iterator value after incrementing: " << *it3 << std::endl;
+	--it3;
+	std::cout << "Iterator value after decrementing: " << *it3 << std::endl;
+
+	std::cout << "----------- print stack ----------------" << std::endl;
 	while (it3 != ite3) {
 		std::cout << *it3 << std::endl;
 		++it3;
