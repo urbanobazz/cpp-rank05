@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:46:12 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/07 18:01:11 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/07 19:37:12 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,20 @@ void	Span::addNumber(int n)
 
 void	Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	if (this->_numbers.size() + std::distance(begin, end) > this->_N)
+	if (this->_numbers.size() >= this->_N)
 		throw std::runtime_error("Array has reached max capacity");
 	this->_numbers.insert(this->_numbers.end(), begin, end);
 }
+/* void	Span::addNumber(std::vector<int>::iterator begin)
+{
+	int free_range = this->_N - this->_numbers.size();
+	if (this->_numbers.size() >= this->_N)
+		throw std::runtime_error("Array has reached max capacity");
+	std::vector<int> randomNumbers(free_range);
+	for (int i = 0; i < free_range; ++i)
+		randomNumbers[i] = std::rand();
+	this->_numbers.insert(begin, randomNumbers.begin(), randomNumbers.end());
+} */
 
 int		Span::shortestSpan(void)
 {
@@ -67,3 +77,4 @@ int		Span::longestSpan(void)
 	return (tmp[tmp.size() - 1] - tmp[0]);
 }
 
+std::vector<int> &Span::getNumbers(void) { return (this->_numbers); }
