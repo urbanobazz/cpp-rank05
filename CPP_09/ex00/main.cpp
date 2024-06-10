@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:22 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/10 15:02:56 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:01:57 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int main(int argc, char **argv) {
 	std::ofstream out;
 	out.open("out.txt");
 	std::cout << "DataBase:" << std::endl;
-	for (std::map<std::string, double>::iterator it = exchange._dataBase.begin(); it != exchange._dataBase.end(); it++) {
-		out << "Date: "<< it->first << " Value: " << it->second << std::endl;
+	for (std::map<t_date, double>::iterator it = exchange._dataBase.begin(); it != exchange._dataBase.end(); it++) {
+		out << "Date: " << it->first << " Value: " << it->second << std::endl;
 	}
 
 	return 0;
