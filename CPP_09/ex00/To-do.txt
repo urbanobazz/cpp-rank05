@@ -1,7 +1,7 @@
 X Create a Date structure to store the date as numbers so that comparisons can be made.
-- The input file should be processed in running time to make error handling easier.
+X The input file should be processed in running time to make error handling easier.
 X Make the functions to convert from string to int and double.
-- Make the fuction to claculate the output.
+X Make the fuction to claculate the output.
 X Make function to check if the date is valid.
 X Research if there is a way to compare to calendar accurate dates (gap year ans so on).
 - [...]

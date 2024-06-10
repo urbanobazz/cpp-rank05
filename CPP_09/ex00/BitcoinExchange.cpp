@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:14 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/10 16:21:38 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:40:31 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	BitcoinExchange::parseDataBase(std::string const &fileName) {
 	while (std::getline(file, line)) {
 		std::string::size_type	pos = line.find(',');
 		t_date					date = stringToDate(line.substr(0, pos));
-		double					rate = toDouble(line.substr(pos + 1));
+		float					rate = toFloat(line.substr(pos + 1));
 
 		this->_dataBase.insert(std::make_pair(date, rate));
 	}
@@ -60,32 +60,32 @@ int	BitcoinExchange::toInt(std::string const &str) {
 
 	iss >> n;
 	if (iss.fail() || !iss.eof()) {
-		std::cerr << "Error: invalid input (not an Int)." << std::endl;
 		return -1;
 	}
 	return n;
 }
 
-double	BitcoinExchange::toDouble(std::string const &str) {
+double	BitcoinExchange::toFloat(std::string const &str) {
 	std::istringstream	iss(str);
-	double				n;
+	float				n;
 
 	iss >> n;
-	if (iss.fail() || !iss.eof()) {
-		std::cerr << "Error: invalid input (not a Double)." << std::endl;
+	if (iss.fail() || !iss.eof())
 		return -1;
-	}
+	if (n < 0)
+		return -2;
 	return n;
 }
 
 t_date BitcoinExchange::stringToDate(std::string const &str)
 {
 	t_date	date;
-	std::string::size_type	pos = str.find('-');
+	std::istringstream	iss(str);
+	char delimiter1, delimiter2;
 
-	date.year = toInt(str.substr(0, pos));
-	date.month = toInt(str.substr(pos + 1, str.find('-', pos + 1) - pos - 1));
-	date.day = toInt(str.substr(str.find('-', pos + 1) + 1));
+	iss >> date.year >> delimiter1 >> date.month >> delimiter2 >> date.day;
+	if (iss.fail() || delimiter1 != '-' || delimiter2 != '-')
+		date.year = -1, date.month = -1, date.day = -1;
 	return date;
 }
 
@@ -93,55 +93,77 @@ bool BitcoinExchange::isLeapYear(int year) {
 	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
 
-bool BitcoinExchange::isValidDate(std::string const &str) {
-	t_date	date = stringToDate(str);
-
-	if (date.year < 0 || date.month < 1 || date.month > 12 || date.day < 1 || date.day > 31) {
-		std::cerr << "Error: invalid date." << std::endl;
+bool BitcoinExchange::isValidDate(t_date const &date) {
+	if (date.year < 0 || date.month < 1 || date.month > 12 || date.day < 1 || date.day > 31)
 		return false;
-	}
-	if (date.month == 2) {
-		if (isLeapYear(date.year) && date.day > 29) {
-			std::cerr << "Error: invalid date." << std::endl;
+	if (date.month == 2)
+		if (isLeapYear(date.year) && date.day > 29)
 			return false;
-		}
-		if (!isLeapYear(date.year) && date.day > 28) {
-			std::cerr << "Error: invalid date." << std::endl;
+		if (!isLeapYear(date.year) && date.day > 28)
 			return false;
-		}
-	}
-	if ((date.month == 4 || date.month == 6 || date.month == 9 || date.month == 11) && date.day > 30) {
-		std::cerr << "Error: invalid date." << std::endl;
+	if ((date.month == 4 || date.month == 6 || date.month == 9 || date.month == 11) && date.day > 30)
 		return false;
-	}
 	return true;
 }
 
-/* void	BitcoinExchange::parseInput(std::string const &fileName) { //make a new data structure to store the input
+void	BitcoinExchange::processInput(std::string const &fileName) {
 	std::ifstream	file(fileName);
 	std::string		line;
 
 	if (!file.is_open()) {
-		std::cerr << "Error: could not open file " << fileName << std::endl;
+		std::cerr << "Error: could not open input file " << fileName << std::endl;
 		exit(1);
 	}
+	/* std::getline(file, line);
+	if (line != "date | value") {
+		std::cerr << "Error: invalid input file format" << std::endl;
+		exit(1);
+	} */
+	int flag = 0;
 	while (std::getline(file, line)) {
-		std::string::size_type	pos = line.find(' ');
-		std::string			date = line.substr(0, pos);
-		double				amount = std::strtod(line.substr(pos + 2).c_str(), NULL); // make my own conversion fucntion and check for errors
+		if (line.empty())
+			continue;
+		else if (flag == 0 && line != "date | value") {
+			std::cerr << "Error: invalid file format[input]" << std::endl;
+			exit(1);
+		}
+		else if (flag == 0)
+		{
+			flag = 1;
+			continue;
+		}
+		std::string::size_type	pos = line.find('|');
+		t_date					date = stringToDate(line.substr(0, pos));
+		float					value = toFloat(line.substr(pos + 1));
 
-		this->_input[date] = amount;
+		if (!isValidDate(date))
+			std::cerr << "Error: invalid date => " << line.substr(0, pos) << std::endl;
+		else if (value == -1)
+			std::cerr << "Error: invalid value [ " << line.substr(pos + 1) << "]" << std::endl;
+		else if (value == -2)
+			std::cerr << "Error: not a positive number." << std::endl;
+		else if (value > 1000)
+			std::cerr << "Error: value too high." << std::endl;
+		else
+			calculateValue(value, date);
 	}
-	file.close();
-} */
+}
 
+void	BitcoinExchange::calculateValue(float amount, t_date const &date) {
+	std::map<t_date, double>::iterator	it = this->_dataBase.lower_bound(date);
 
-
-
-
-
-
-
+	if (it == this->_dataBase.begin())
+	{
+		if (it->first == date)
+			std::cout << date << " => " << amount << " = " << amount * it->second << std::endl;
+		else
+		std::cout << " No match found to this date." << std::endl;
+		return;
+	}
+	if (it == this->_dataBase.end() || !(it->first == date))
+		--it;
+	std::cout << date << " => " << amount << " = " << amount * it->second << std::endl;
+}
 
 
 // s_date fucntions

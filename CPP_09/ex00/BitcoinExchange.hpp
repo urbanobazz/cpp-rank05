@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:39 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/10 16:18:28 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:35:04 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,15 @@ class BitcoinExchange
 
 		void				parseDataBase(std::string const &fileName);
 		int					toInt(std::string const &str);
-		double				toDouble(std::string const &str);
+		double				toFloat(std::string const &str);
 		t_date 				stringToDate(std::string const &str);
-		bool				isValidDate(std::string const &str);
+		bool				isValidDate(t_date const &date);
 		bool				isLeapYear(int year);
+		void				processInput(std::string const &fileName);
+		void				calculateValue(float amount, t_date const &date);
 
-		//void				calculateOutput(void);
-
-
-			std::map<t_date, double>	_dataBase; // put back to private!!
-		private:
+	private:
+		std::map<t_date, double>	_dataBase; // put back to private!!
 };
 
 std::ostream& operator<<(std::ostream& os, const s_date& dt);
