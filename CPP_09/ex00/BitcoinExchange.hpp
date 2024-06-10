@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:39 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/09 17:37:38 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:42:49 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class BitcoinExchange
 
 		BitcoinExchange &	operator=(BitcoinExchange const &other);
 
-		void				parseInput(std::string const &fileName);
+		// void				parseInput(std::string const &fileName);
 		void				parseDataBase(std::string const &fileName);
 		int					toInt(std::string const &str);
 		double				toDouble(std::string const &str);

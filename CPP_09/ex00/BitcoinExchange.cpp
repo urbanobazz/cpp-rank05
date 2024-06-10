@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:14 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/09 18:14:04 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:05:44 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ BitcoinExchange &	BitcoinExchange::operator=(BitcoinExchange const &other) {
 	return *this;
 }
 
-void	BitcoinExchange::parseInput(std::string const &fileName) { //make a new data structure to store the input
+/* void	BitcoinExchange::parseInput(std::string const &fileName) { //make a new data structure to store the input
 	std::ifstream	file(fileName);
 	std::string		line;
 
@@ -44,26 +44,31 @@ void	BitcoinExchange::parseInput(std::string const &fileName) { //make a new dat
 		this->_input[date] = amount;
 	}
 	file.close();
-}
+} */
 
 void	BitcoinExchange::parseDataBase(std::string const &fileName) {
 	std::ifstream	file(fileName);
 	std::string		line;
 
-	if (!file.is_open()) {
-		std::cerr << "Error: could not open file " << fileName << std::endl;
-		exit(1);
-	}
 	if (strncmp(fileName.c_str() + fileName.length() - 4, ".csv", 4) != 0) {
 		std::cerr << "Error: file " << fileName << " is not a CSV file" << std::endl;
+		exit(1);
+	}
+	if (!file.is_open()) {
+		std::cerr << "Error: could not open database file " << fileName << std::endl;
+		exit(1);
+	}
+	std::getline(file, line);
+	if (line != "date,exchange_rate") {
+		std::cerr << "Error: invalid database file format" << std::endl;
 		exit(1);
 	}
 	while (std::getline(file, line)) {
 		std::string::size_type	pos = line.find(',');
 		std::string				date = line.substr(0, pos);
-		double					rate = std::strtod(line.substr(pos + 1).c_str(), NULL); // make my own conversion fucntion and check for errors
+		double					rate = toDouble(line.substr(pos + 1));
 
-		this->_dataBase[date] = rate;
+		this->_dataBase.insert(std::make_pair(date, rate));
 	}
 	file.close();
 }
