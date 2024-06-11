@@ -1,0 +1,6 @@
+Algorithm:
+X 1. Split the list in pairs
+X 2. Identify the min and max of the pair.
+X 3. Create 2 new lists, one for the higher numbers and one for the lower ones. If a number was left withou a pair, it goes in the small list.
+ 4. Sort the two lists using insertion sort.
+ 5. merge the lists back together.
