@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:26:40 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/11 13:02:13 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/11 13:41:52 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	RPN::calculateExpression(void)
 		else if (token >= "0" && token <= "9")
 			pushOperand(token);
 		else {
-			std::cerr << "Error: invalid token \" " << token << " \"" << std::endl;
+			std::cout << "Error: invalid token \" " << token << " \"" << std::endl;
 			exit(1);
 		}
 	}
@@ -50,7 +50,7 @@ void RPN::executeOperation(std::string token)
 {
 	if (this->_stack.size() < 2)
 	{
-		std::cerr << "Error: not enough operands" << std::endl;
+		std::cout << "Error: not enough operands" << std::endl;
 		exit(1);
 	}
 	int op2 = this->_stack.top();
@@ -71,13 +71,13 @@ void RPN::executeOperation(std::string token)
 		case '/':
 			if (op2 == 0)
 			{
-				std::cerr << "Error: division by zero" << std::endl;
+				std::cout << "Error: division by zero" << std::endl;
 				exit(1);
 			}
 			this->_stack.push(op1 / op2);
 			break;
 		default:
-			std::cerr << "Error: invalid token \"" << token << "\"" << std::endl;
+			std::cout << "Error: invalid token \"" << token << "\"" << std::endl;
 			exit(1);
 	}
 }
@@ -90,12 +90,12 @@ void	RPN::pushOperand(std::string operand)
 	iss >> value;
 	if (iss.fail())
 	{
-		std::cerr << "Error: not an integer \" " << operand << " \"" << std::endl;
+		std::cout << "Error: not an integer \" " << operand << " \"" << std::endl;
 		exit(1);
 	}
 	else if (value < 0 || value > 9)
 	{
-		std::cerr << "Error: invalid integer \" " << operand << " \"" << std::endl;
+		std::cout << "Error: invalid integer \" " << operand << " \"" << std::endl;
 		exit(1);
 	}
 	else
