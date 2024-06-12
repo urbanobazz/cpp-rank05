@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:39:58 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/12 12:05:04 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:06:04 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	PmergeMe::stringToInt(const std::string &str)
 	iss >> n;
 	if (iss.fail())
 	{
-		std::cout << "Error: Invalid input \" " << str << " \"" << std::endl;
+		std::cout << "Error: Invalid input \"" << str << "\"" << std::endl;
 		exit(1);
 	}
 	else if (n < 0)
 	{
-		std::cout << "Error: Negative number \" " << str << " \"" << std::endl;
+		std::cout << "Error: Negative number \"" << str << "\"" << std::endl;
 		exit(1);
 	}
 	else
@@ -129,7 +129,11 @@ void PmergeMe::sortList() {
 void	PmergeMe::printResult()
 {
 	std::cout << "Before: ";
-	for (std::vector<int>::iterator it = this->_vector.begin(); it != this->_vector.begin() + 5; it++)
+	if (_vector.size() < 5)
+		for (std::vector<int>::iterator it = this->_vector.begin(); it != this->_vector.end(); it++)
+			std::cout << *it << " ";
+	else
+		for (std::vector<int>::iterator it = this->_vector.begin(); it != this->_vector.begin() + 5; it++)
 		std::cout << *it << " ";
 	if (this->_vector.size() > 5)
 		std::cout << "[...]";
@@ -137,8 +141,12 @@ void	PmergeMe::printResult()
 
 
 	std::cout << "After: ";
-	for (std::vector<int>::iterator it = this->_vectorSorted.begin(); it != this->_vectorSorted.begin() + 5; it++)
-		std::cout << *it << " ";
+	if (_vectorSorted.size() < 5)
+		for (std::vector<int>::iterator it = this->_vectorSorted.begin(); it != this->_vectorSorted.end(); it++)
+			std::cout << *it << " ";
+	else
+		for (std::vector<int>::iterator it = this->_vectorSorted.begin(); it != this->_vectorSorted.begin() + 5; it++)
+			std::cout << *it << " ";
 	if (this->_vectorSorted.size() > 5)
 		std::cout << "[...]";
 	std::cout << std::endl;

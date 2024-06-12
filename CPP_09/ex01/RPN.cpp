@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:26:40 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/11 13:41:52 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:17:25 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,14 @@ void	RPN::calculateExpression(void)
 		else if (token >= "0" && token <= "9")
 			pushOperand(token);
 		else {
-			std::cout << "Error: invalid token \" " << token << " \"" << std::endl;
+			std::cout << "Error: invalid token \"" << token << "\"" << std::endl;
 			exit(1);
 		}
+	}
+	if (_stack.size() != 1)
+	{
+		std::cout << "Error: invalid sequence." << std::endl;
+		exit(1);
 	}
 	std::cout << this->_stack.top() << std::endl;
 }
@@ -90,12 +95,12 @@ void	RPN::pushOperand(std::string operand)
 	iss >> value;
 	if (iss.fail())
 	{
-		std::cout << "Error: not an integer \" " << operand << " \"" << std::endl;
+		std::cout << "Error: not an integer \"" << operand << "\"" << std::endl;
 		exit(1);
 	}
 	else if (value < 0 || value > 9)
 	{
-		std::cout << "Error: invalid integer \" " << operand << " \"" << std::endl;
+		std::cout << "Error: invalid integer \"" << operand << "\"" << std::endl;
 		exit(1);
 	}
 	else
