@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:39 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/10 17:35:04 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/12 11:30:19 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string>
 # include <cstring>
 # include <map>
+# include <cstdlib>
 
 class BitcoinExchange;
 

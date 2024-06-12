@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:39:58 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/11 19:50:23 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:05:04 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,21 +136,21 @@ void	PmergeMe::printResult()
 	std::cout << std::endl;
 
 
-	std::cout << "Vector after: ";
+	std::cout << "After: ";
 	for (std::vector<int>::iterator it = this->_vectorSorted.begin(); it != this->_vectorSorted.begin() + 5; it++)
 		std::cout << *it << " ";
 	if (this->_vectorSorted.size() > 5)
 		std::cout << "[...]";
 	std::cout << std::endl;
 
-	std::cout << "List after: ";
+/* 	std::cout << "List after: ";
 	std::list<int>::iterator it = this->_listSorted.begin();
 	std::advance(it, 5);
 	for (std::list<int>::iterator it2 = this->_listSorted.begin(); it2 != it; it2++)
 		std::cout << *it2 << " ";
 	if (this->_listSorted.size() > 5)
 		std::cout << "[...]";
-	std::cout << std::endl;
+	std::cout << std::endl; */
 
 	std::cout << "Time to preccess a range of " << _vectorSorted.size() << " elements with std::vector: "
 	<< std::fixed << std::setprecision(4) << this->_timeVector << " ms." << std::endl;

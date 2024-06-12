@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:25:14 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/10 18:40:31 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/12 11:33:01 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ BitcoinExchange &	BitcoinExchange::operator=(BitcoinExchange const &other) {
 }
 
 void	BitcoinExchange::parseDataBase(std::string const &fileName) {
-	std::ifstream	file(fileName);
+	std::ifstream	file(fileName.c_str());
 	std::string		line;
 
 	if (strncmp(fileName.c_str() + fileName.length() - 4, ".csv", 4) != 0) {
@@ -97,28 +97,23 @@ bool BitcoinExchange::isValidDate(t_date const &date) {
 	if (date.year < 0 || date.month < 1 || date.month > 12 || date.day < 1 || date.day > 31)
 		return false;
 	if (date.month == 2)
-		if (isLeapYear(date.year) && date.day > 29)
-			return false;
-		if (!isLeapYear(date.year) && date.day > 28)
-			return false;
+	if (isLeapYear(date.year) && date.day > 29)
+		return false;
+	if (!isLeapYear(date.year) && date.day > 28)
+		return false;
 	if ((date.month == 4 || date.month == 6 || date.month == 9 || date.month == 11) && date.day > 30)
 		return false;
 	return true;
 }
 
 void	BitcoinExchange::processInput(std::string const &fileName) {
-	std::ifstream	file(fileName);
+	std::ifstream	file(fileName.c_str());
 	std::string		line;
 
 	if (!file.is_open()) {
 		std::cerr << "Error: could not open input file " << fileName << std::endl;
 		exit(1);
 	}
-	/* std::getline(file, line);
-	if (line != "date | value") {
-		std::cerr << "Error: invalid input file format" << std::endl;
-		exit(1);
-	} */
 	int flag = 0;
 	while (std::getline(file, line)) {
 		if (line.empty())

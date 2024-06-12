@@ -6,7 +6,7 @@
 /*   By: ubazzane <ubazzane@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:40:12 by ubazzane          #+#    #+#             */
-/*   Updated: 2024/06/11 19:33:20 by ubazzane         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:02:23 by ubazzane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void PmergeMe::splitSequence(T &lower, T &upper, T &sequence)
 	typename T::iterator it = sequence.begin();
 	while (it != sequence.end())
 	{
-		typename T::iterator next_it = std::next(it, 1);
+		typename T::iterator next_it = it; ++next_it;
 		if (next_it != sequence.end())
 		{
 			if (*it < *next_it)
@@ -79,7 +79,7 @@ void PmergeMe::splitSequence(T &lower, T &upper, T &sequence)
 				lower.push_back(*next_it);
 				upper.push_back(*it);
 			}
-			it = std::next(next_it, 1);
+			it = next_it; ++it;
 		}
 		else
 		{
@@ -90,15 +90,21 @@ void PmergeMe::splitSequence(T &lower, T &upper, T &sequence)
 }
 
 template <typename T>
-void	PmergeMe::insertionSort(T &sequence)
+void PmergeMe::insertionSort(T &sequence)
 {
-	for (typename T::iterator it = sequence.begin(); it != sequence.end(); it++)
+	for (typename T::iterator it = sequence.begin(); it != sequence.end(); ++it)
 	{
-		typename T::iterator it2 = it;
-		while (it2 != sequence.begin() && *it2 < *std::prev(it2))
+		for (typename T::iterator it2 = it; it2 != sequence.begin(); )
 		{
-			std::iter_swap(it2, std::prev(it2));
-			it2 = std::prev(it2);
+			typename T::iterator it3 = it2;
+			--it3;
+			if (*it3 > *it2) // if the previous element is greater than the current
+			{
+				std::swap(*it3, *it2);
+				--it2; // go back to check the previous pair
+			}
+			else // if they are in the right order, move on to the next pair
+				break;
 		}
 	}
 }
